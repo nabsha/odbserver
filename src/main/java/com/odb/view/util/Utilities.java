@@ -19,12 +19,10 @@ import javax.crypto.spec.PBEParameterSpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.odb.core.dao.dto.ViewConfiguration;
 import com.odb.view.dashboard.client.dto.DataSourceAxisDetailInfo;
 import com.odb.view.dashboard.client.dto.DataSourceAxisInfo;
 import com.odb.view.dashboard.client.dto.DataSourceInfo;
 import com.odb.view.dashboard.client.dto.GraphInfo;
-import com.odb.view.dashboard.client.dto.SubscriberDataSource;
 import com.odb.view.dashboard.client.dto.SubscriberInfo;
 import com.odb.view.dashboard.client.dto.SubscriberViewConfiguration;
 import com.odb.view.dashboard.client.dto.ViewConfig;
@@ -112,23 +110,6 @@ public class Utilities {
     }
     
     /**
-     * Gets the client view config.
-     *
-     * @param viewConfiguration the view configuration
-     * @return the client view config
-     */
-    public static ViewConfig getClientViewConfig(ViewConfiguration viewConfiguration){
-    	ViewConfig viewConfig= new ViewConfig();
-    	viewConfig.setDisplayed(viewConfiguration.isDisplayed());
-		viewConfig.setStartX(viewConfiguration.getStartX());
-		viewConfig.setStartY(viewConfiguration.getStartY());
-		viewConfig.setViewHeight(viewConfiguration.getViewHeight());
-		viewConfig.setViewWidth(viewConfiguration.getViewWidth());
-		viewConfig.setViewLocationID(viewConfiguration.getViewLocationID());
-		return viewConfig;
-    }
-    
-    /**
      * Gets the client data source axis detail info.
      *
      * @param dataSourceAxisDetailInfo the data source axis detail info
@@ -179,34 +160,4 @@ public class Utilities {
 		return dsi;
 	}
 	
-	/**
-	 * Gets the client subscriber data source.
-	 *
-	 * @param subscriberDataSource the subscriber data source
-	 * @return the client subscriber data source
-	 */
-	public static SubscriberDataSource getClientSubscriberDataSource(com.odb.core.SubscriberDataSource subscriberDataSource){
-		SubscriberDataSource sds = new SubscriberDataSource();
-		sds.setDataSourceID(subscriberDataSource.getDataSourceID());
-		sds.setGraphID(subscriberDataSource.getGraphID());
-		sds.setSubscriberDataSourceID(subscriberDataSource.getSubscriberDataSourceID());
-		sds.setSubscriberID(subscriberDataSource.getSubscriberID());
-		sds.setSubscriberViewConfiguration( getCliectSubscriberViewConfiguration(subscriberDataSource.getSubscriberViewConfiguration()));
-		sds.setGraphInfo(new GraphInfo(subscriberDataSource.getGraphInfo().getGraphID(), subscriberDataSource.getGraphInfo().getGraphName(), subscriberDataSource.getGraphInfo().getGraphType()));
-		return sds;
-	}
-
-	/**
-	 * Gets the cliect subscriber view configuration.
-	 *
-	 * @param subscriberViewConfiguration the subscriber view configuration
-	 * @return the cliect subscriber view configuration
-	 */
-	public static SubscriberViewConfiguration getCliectSubscriberViewConfiguration(com.odb.core.dao.dto.SubscriberViewConfiguration subscriberViewConfiguration){
-		SubscriberViewConfiguration svc = new SubscriberViewConfiguration();
-		svc.setSubscriberID(subscriberViewConfiguration.getSubscriberID());
-		svc.setSubsriberDataSourceID(subscriberViewConfiguration.getSubsriberDataSourceID());
-		svc.setViewLocationID(subscriberViewConfiguration.getViewLocationID());
-		return svc;
-	}
 }

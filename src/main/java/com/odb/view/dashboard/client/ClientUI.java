@@ -119,7 +119,7 @@ public class ClientUI {
 
 					public void onSuccess(DataSourceConfiguration result) {
 						addChart(result, dropBox.getValue(dropBox.getSelectedIndex()), 400,300);
-						dashboardService.addSubscription(result.getDsID(), "1", null);
+						dashboardService.addSubscription(result.getDsID(), dropBox.getValue(dropBox.getSelectedIndex()), null);
 					}
 				});
 

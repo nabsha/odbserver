@@ -13,6 +13,7 @@ import java.util.HashMap;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.odb.core.service.DataSourceConfiguration;
 import com.odb.view.dashboard.client.dto.PublisherInfo;
+import com.odb.view.dashboard.client.dto.SubscriberSubscription;
 import com.odb.view.dashboard.client.dto.ViewSettings;
 
 
@@ -43,7 +44,7 @@ public interface DashboardServiceAsync {
 	void getDataSources(String publisherID, AsyncCallback<ArrayList<com.odb.view.dashboard.client.dto.DataSourceInfo>> callback);
 	void getDataSourceAllDetails(String dataSourceID, AsyncCallback<DataSourceConfiguration> callback);
 
-	void getCurrentSubscriptions(AsyncCallback<ArrayList<DataSourceConfiguration>> asyncCallback);
+	void getCurrentSubscriptions(AsyncCallback<ArrayList<SubscriberSubscription>> asyncCallback);
 
 	void addSubscription(String dsID, String graphID, AsyncCallback callback);
 }

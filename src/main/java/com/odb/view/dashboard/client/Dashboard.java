@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.odb.core.service.DataSourceConfiguration;
 import com.odb.view.core.ActionProcessor;
 import com.odb.view.dashboard.client.charts.ODBChart;
+import com.odb.view.dashboard.client.dto.SubscriberSubscription;
 
 /**
  * Dashboard class is the GWT Entry point classes that define
@@ -53,18 +54,23 @@ public class Dashboard implements EntryPoint {
 	public void onModuleLoad() {
 
 		final ClientUI ui = new ClientUI(dashboardService);
-		dashboardService.getCurrentSubscriptions(new AsyncCallback<ArrayList<DataSourceConfiguration>>() {
+		dashboardService.getCurrentSubscriptions(new AsyncCallback<ArrayList<SubscriberSubscription>>() {
 
 			public void onFailure(Throwable caught) {
 				dbg.debug("Failed in getCurrentSubscriptions " + caught);
-
 			}
 
-			public void onSuccess(ArrayList<DataSourceConfiguration> result) {
-				for (DataSourceConfiguration dsConfig : result) {
-					ui.addChart(dsConfig, "HORIZONTAL_LINE",400, 300);
+			public void onSuccess(ArrayList<SubscriberSubscription> result) {				
+				for (SubscriberSubscription dsConfig : result) {
+					DataSourceConfiguration d = new DataSourceConfiguration();
+					d.setDsID(dsConfig.getDsID());
+					d.setDsName(dsConfig.getDsName());
+					d.setDsTimeoutInterval(dsConfig.getDsTimeoutInterval());
+					d.setPublisherID(dsConfig.getPublisherID());
+					d.setSeriesCount(dsConfig.getSeriesCount());
+					d.setXsInfo(dsConfig.getXsInfo());
+					ui.addChart(d, dsConfig.getGraphID(),400, 300);
 				}
-
 			}
 		});
 	}

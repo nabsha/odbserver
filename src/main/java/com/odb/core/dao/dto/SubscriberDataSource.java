@@ -4,7 +4,7 @@
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  ******************************************************************************/
-package com.odb.view.dashboard.client.dto;
+package com.odb.core.dao.dto;
 
 import java.io.Serializable;
 
@@ -18,13 +18,6 @@ public class SubscriberDataSource implements Serializable{
 	/** The subscriber data source id. */
 	private String subscriberID, dataSourceID, graphID, subscriberDataSourceID;
 	
-	/** The subscriber view configuration. */
-	private SubscriberViewConfiguration subscriberViewConfiguration;
-	
-	/** The graph info. */
-	private GraphInfo graphInfo;
-	
-
 	/**
 	 * Gets the subscriber id.
 	 *
@@ -95,42 +88,5 @@ public class SubscriberDataSource implements Serializable{
 	 */
 	public void setSubscriberDataSourceID(String subscriberDataSourceID) {
 		this.subscriberDataSourceID = subscriberDataSourceID;
-	}
-
-	/**
-	 * Gets the subscriber view configuration.
-	 *
-	 * @return the subscriber view configuration
-	 */
-	public SubscriberViewConfiguration getSubscriberViewConfiguration() {
-		return subscriberViewConfiguration;
-	}
-
-	/**
-	 * Sets the subscriber view configuration.
-	 *
-	 * @param subscriberViewConfiguration the new subscriber view configuration
-	 */
-	public void setSubscriberViewConfiguration(
-			SubscriberViewConfiguration subscriberViewConfiguration) {
-		this.subscriberViewConfiguration = subscriberViewConfiguration;
-	}
-
-	/**
-	 * Gets the graph info.
-	 *
-	 * @return the graph info
-	 */
-	public GraphInfo getGraphInfo() {
-		return graphInfo;
-	}
-
-	/**
-	 * Sets the graph info.
-	 *
-	 * @param graphInfo the new graph info
-	 */
-	public void setGraphInfo(GraphInfo graphInfo) {
-		this.graphInfo = graphInfo;
 	}
 }

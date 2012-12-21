@@ -26,7 +26,6 @@ import com.odb.core.dao.dto.DataSourceInfo;
 import com.odb.core.dao.dto.DataSourceSeries;
 import com.odb.core.dao.dto.PublisherInfo;
 import com.odb.core.dao.dto.SubscriberInfo;
-import com.odb.core.dao.dto.ViewConfiguration;
 import com.odb.core.service.DataSourceConfiguration;
 import com.odb.core.service.OpenDashBoard;
 import com.odb.view.dashboard.client.DashboardService;
@@ -34,6 +33,7 @@ import com.odb.view.dashboard.client.DataVO;
 import com.odb.view.dashboard.client.TimeSeriesDataVO;
 import com.odb.view.dashboard.client.dto.DataSourceAxisInfo;
 import com.odb.view.dashboard.client.dto.LiveChartVO;
+import com.odb.view.dashboard.client.dto.SubscriberSubscription;
 import com.odb.view.dashboard.client.dto.ViewConfig;
 import com.odb.view.dashboard.client.dto.ViewSettings;
 import com.odb.view.dashboard.client.exceptions.FetchDataSourceException;
@@ -96,16 +96,24 @@ public class DashboardServiceImpl extends RemoteServiceServlet implements Dashbo
 		return dsConfig;
 	}
 
-	public ArrayList<DataSourceConfiguration> getCurrentSubscriptions() {
-		ArrayList<DataSourceConfiguration> dsConfigList = null;
+	public ArrayList<SubscriberSubscription> getCurrentSubscriptions() {
+		ArrayList<SubscriberSubscription> dsConfigList = null;
 		SubscriberInfo subscriberInfo = (SubscriberInfo) getThreadLocalRequest().getSession().getAttribute("subscriberInfo");
 		String subscriberID = Utilities.getClientSubscriberInfo(subscriberInfo).getSubscriberID();
 		try {
-			ArrayList<DataSourceInfo> subDS = odbCore.getAllDataSourceBySubscriber(subscriberID);
-			dsConfigList = new ArrayList<DataSourceConfiguration>(subDS.size());
-			for (DataSourceInfo ds : subDS) {
+			ArrayList<SubscriberDataSource> subDS = odbCore.getAllDataSourceBySubscriber(subscriberID);
+			dsConfigList = new ArrayList<SubscriberSubscription>(subDS.size());
+			for (SubscriberDataSource ds : subDS) {
 				DataSourceConfiguration dsConfig = odbCore.getDataSourceConfigurationBy(ds.getDataSourceID());
-				dsConfigList.add(dsConfig);
+				SubscriberSubscription ss = new SubscriberSubscription();
+				ss.setGraphID(ds.getGraphID());
+				ss.setDsID(dsConfig.getDsID());
+				ss.setDsName(dsConfig.getDsName());
+				ss.setDsTimeoutInterval(dsConfig.getDsTimeoutInterval());
+				ss.setPublisherID(dsConfig.getPublisherID());
+				ss.setSeriesCount(dsConfig.getSeriesCount());
+				ss.setXsInfo(dsConfig.getXsInfo());
+				dsConfigList.add(ss);
 			}
 
 		} catch (SQLException e) {

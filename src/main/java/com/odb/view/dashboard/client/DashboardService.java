@@ -13,6 +13,7 @@ import java.util.HashMap;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.odb.core.service.DataSourceConfiguration;
+import com.odb.view.dashboard.client.dto.SubscriberSubscription;
 import com.odb.view.dashboard.client.dto.ViewSettings;
 import com.odb.view.dashboard.client.exceptions.FetchDataSourceException;
 import com.odb.view.dashboard.client.exceptions.GraphNotAvailableException;
@@ -67,7 +68,7 @@ public interface DashboardService extends RemoteService {
 
 	public DataSourceConfiguration getDataSourceAllDetails(String dataSourceID);
 
-	public ArrayList<DataSourceConfiguration> getCurrentSubscriptions();
+	public ArrayList<SubscriberSubscription> getCurrentSubscriptions();
 
 	void addSubscription(String dsID, String graphID);
 }

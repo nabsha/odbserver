@@ -21,7 +21,6 @@ import com.odb.view.dashboard.client.charts.ODBChart;
 import com.odb.view.dashboard.client.dto.DataSourceAxisDetailInfo;
 import com.odb.view.dashboard.client.dto.DataSourceAxisInfo;
 import com.odb.view.dashboard.client.dto.DataSourceInfo;
-import com.odb.view.dashboard.client.dto.SubscriberDataSource;
 import com.odb.view.dashboard.client.dto.ViewConfig;
 import com.odb.view.dashboard.client.dto.ViewSettings;
 import com.odb.view.dashboard.client.exceptions.ChartSettingsNotValidException;

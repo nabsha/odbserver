@@ -4,21 +4,32 @@
  * 
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  ******************************************************************************/
-package com.odb.core.service;
+package com.odb.view.dashboard.client.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import com.odb.core.service.AxisInfo;
+
 /**
  * The Class DataSourceConfiguration.
  */
-public class DataSourceConfiguration  implements Serializable {
+public class SubscriberSubscription  implements Serializable {
 	
 	/** The ds name. */
 	private String dsName;
 	private String dsID;
 	private int seriesCount;
 	private String publisherID;
+	private String graphID;
+	public String getGraphID() {
+		return graphID;
+	}
+
+	public void setGraphID(String graphID) {
+		this.graphID = graphID;
+	}
+
 	/** The xs info. */
 	private ArrayList<AxisInfo> xsInfo;
 	

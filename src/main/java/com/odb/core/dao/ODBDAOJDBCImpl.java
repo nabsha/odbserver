@@ -31,7 +31,6 @@ import com.odb.core.dao.dto.GraphInfo;
 import com.odb.core.dao.dto.PublisherInfo;
 import com.odb.core.dao.dto.SubscriberInfo;
 import com.odb.core.dao.dto.SubscriberViewConfiguration;
-import com.odb.core.dao.dto.ViewConfiguration;
 import com.odb.core.dao.rowmappers.DataSourceAxisDetailInfoRowMapper;
 import com.odb.core.dao.rowmappers.DataSourceAxisInfoRowMapper;
 import com.odb.core.dao.rowmappers.DataSourceInfoResultSetExtractor;
@@ -39,9 +38,8 @@ import com.odb.core.dao.rowmappers.DataSourceInfoRowMapper;
 import com.odb.core.dao.rowmappers.DataSourceSeriesRowMapper;
 import com.odb.core.dao.rowmappers.PublisherInfoResultSetExtractor;
 import com.odb.core.dao.rowmappers.PublisherInfoRowMapper;
-import com.odb.core.dao.rowmappers.SubscriberDataSourceoResultSetExtractor;
+import com.odb.core.dao.rowmappers.SubscriberDataSourceRowMapper;
 import com.odb.core.dao.rowmappers.SubscriberInfoResultSetExtractor;
-import com.odb.core.dao.rowmappers.ViewConfigurationRowMapper;
 import com.odb.core.service.OpenDashBoard;
 import com.thoughtworks.xstream.XStream;
 
@@ -196,11 +194,11 @@ public class ODBDAOJDBCImpl implements ODBDAO {
 		return pubList;
 	}
 
-	public ArrayList<DataSourceInfo> getAllDataSourceBySubscriberID(String subscriberId) {
-		String sql = "SELECT ODI.* FROM ODB_SUB_DATASOURCES SDS, ODB_DATASOURCE_INFO ODI WHERE SDS.SUBSCRIBER_ID=? AND SDS.DATASOURCE_ID=ODI.DATASOURCE_ID";
-		ArrayList<DataSourceInfo> subDSList = (ArrayList<DataSourceInfo>) jdbcTemp.getJdbcOperations().query(sql, new Object[] { subscriberId },
-				new DataSourceInfoRowMapper());
-		log.debug("ArrayList<DataSourceInfo>" + subDSList);
+	public ArrayList<SubscriberDataSource> getAllDataSourceBySubscriberID(String subscriberId) {
+		String sql = "SELECT * FROM ODB_SUB_DATASOURCES WHERE SUBSCRIBER_ID=?";
+		ArrayList<SubscriberDataSource> subDSList = (ArrayList<SubscriberDataSource>) jdbcTemp.getJdbcOperations().query(sql, new Object[] { subscriberId },
+				new SubscriberDataSourceRowMapper());
+		log.debug("ArrayList<SubscriberDataSource>" + subDSList);
 		return subDSList;
 	}
 
@@ -268,34 +266,6 @@ public class ODBDAOJDBCImpl implements ODBDAO {
 		paramMap.put("subscriberPassword", password);
 		return jdbcTemp.query(sql, paramMap, new SubscriberInfoResultSetExtractor());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.odb.core.dao.ODBDAO#getSubscriberDataSourceBy(java.lang.String,
-	 * java.lang.String)
-	 */
-	public SubscriberDataSource getSubscriberDataSourceBy(String subscriberId, String viewLocationID) throws SQLException {
-		String sql = "SELECT SDS.* , SVC.VIEW_LOCATION_ID, GC.GRAPH_NAME, GC.GRAPH_TYPE FROM ODB_SUB_DATASOURCES SDS, ODB_SUB_VIEW_CONFIG SVC, ODB_GRAPH_CONFIG GC WHERE SDS.SUBSCRIBER_DATASOURCE_ID=SVC.SUBSCRIBER_DATASOURCE_ID AND SDS.GRAPH_ID=GC.GRAPH_ID AND SDS.SUBSCRIBER_ID=:subscriberID AND SVC.VIEW_LOCATION_ID=:viewLocationID";
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("subscriberID", subscriberId);
-		paramMap.put("viewLocationID", viewLocationID);
-		SubscriberDataSource sds = jdbcTemp.query(sql, paramMap, new SubscriberDataSourceoResultSetExtractor());
-		log.debug("SubscriberDataSource" + sds);
-		return sds;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.odb.core.dao.ODBDAO#getViewConfigurationList()
-	 */
-	public List<ViewConfiguration> getViewConfigurationList() throws SQLException {
-		String sql = "SELECT * FROM ODB_VIEW_CONFIG WHERE IS_DESPLAYED=1";
-		List<ViewConfiguration> vcfgList = jdbcTemp.getJdbcOperations().query(sql, new ViewConfigurationRowMapper());
-		return vcfgList;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -30,7 +30,6 @@ import com.odb.core.dao.dto.DataSourceInfo;
 import com.odb.core.dao.dto.DataSourceSeries;
 import com.odb.core.dao.dto.PublisherInfo;
 import com.odb.core.dao.dto.SubscriberInfo;
-import com.odb.core.dao.dto.ViewConfiguration;
 import com.odb.core.service.exceptions.InvalidAuthenticationException;
 
 /**
@@ -211,7 +210,7 @@ public class OpenDashBoard {
 	 * @throws SQLException
 	 *             the sQL exception
 	 */
-	public ArrayList<DataSourceInfo> getAllDataSourceBySubscriber(String subscriberID) throws SQLException {
+	public ArrayList<SubscriberDataSource> getAllDataSourceBySubscriber(String subscriberID) throws SQLException {
 		return odbDAO.getAllDataSourceBySubscriberID(subscriberID);
 	}
 
@@ -306,40 +305,6 @@ public class OpenDashBoard {
 			log.error("error while Publishing dataSourceId: " + dataSourceId, e);
 		}
 		return false;
-	}
-
-	/**
-	 * Gets the view configuration list.
-	 * 
-	 * @return the view configuration list
-	 */
-	public List<ViewConfiguration> getViewConfigurationList() {
-		List<ViewConfiguration> viewConfigList = null;
-		try {
-			viewConfigList = odbDAO.getViewConfigurationList();
-		} catch (SQLException e) {
-			log.error("Getting View configuration Failed..." + e);
-		}
-		return viewConfigList;
-	}
-
-	/**
-	 * Gets the subscriber data source by.
-	 * 
-	 * @param subscriberId
-	 *            the subscriber id
-	 * @param viewLocationID
-	 *            the view location id
-	 * @return the subscriber data source by
-	 */
-	public SubscriberDataSource getSubscriberDataSourceBy(String subscriberId, String viewLocationID) {
-		SubscriberDataSource sds = null;
-		try {
-			sds = odbDAO.getSubscriberDataSourceBy(subscriberId, viewLocationID);
-		} catch (SQLException e) {
-			log.error("Getting Subscriber DataSource failed for subscriberID:" + subscriberId + " SubsrciptionID:" + viewLocationID + e);
-		}
-		return sds;
 	}
 
 	/**

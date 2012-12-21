@@ -19,7 +19,6 @@ import com.odb.core.dao.dto.GraphInfo;
 import com.odb.core.dao.dto.PublisherInfo;
 import com.odb.core.dao.dto.SubscriberInfo;
 import com.odb.core.dao.dto.SubscriberViewConfiguration;
-import com.odb.core.dao.dto.ViewConfiguration;
 
 
 /**
@@ -183,32 +182,13 @@ public interface ODBDAO {
 	public SubscriberInfo subscriberLogin(String username, String password) throws SQLException ;
 
 	/**
-	 * Gets the view configuration list.
-	 * 
-	 * @return the view configuration list
-	 */
-	public List<ViewConfiguration> getViewConfigurationList() throws SQLException ;
-
-	/**
-	 * Gets the subscriber data source by.
-	 * 
-	 * @param subscriberId
-	 *            the subscriber id
-	 * @param viewLocationID
-	 *            the view location id
-	 * @return SubscriberDataSource with its SubscriberViewConfiguration and
-	 *         GraphInfo objects
-	 */
-	public SubscriberDataSource getSubscriberDataSourceBy(String subscriberId, String viewLocationID) throws SQLException ;
-
-	/**
 	 * Gets the subscriber data source by.
 	 * 
 	 * @param subscriberId
 	 *            the subscriber id
 	 * @return
 	 */
-	public ArrayList<DataSourceInfo> getAllDataSourceBySubscriberID(String subscriberId) throws SQLException ;
+	public ArrayList<SubscriberDataSource> getAllDataSourceBySubscriberID(String subscriberId) throws SQLException ;
 
 	/**
 	 * Gets the data source by data source id.

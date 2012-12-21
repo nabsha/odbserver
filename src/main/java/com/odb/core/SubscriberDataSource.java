@@ -6,24 +6,17 @@
  ******************************************************************************/
 package com.odb.core;
 
-import com.odb.core.dao.dto.GraphInfo;
-import com.odb.core.dao.dto.SubscriberViewConfiguration;
+import java.io.Serializable;
+
 
 /**
  * The Class SubscriberDataSource.
- * 
- * this class is a DTO
  */
-public class SubscriberDataSource {
+@SuppressWarnings("serial")
+public class SubscriberDataSource implements Serializable{
 	
 	/** The subscriber data source id. */
 	private String subscriberID, dataSourceID, graphID, subscriberDataSourceID;
-
-	/** The subscriber view configuration. */
-	private SubscriberViewConfiguration subscriberViewConfiguration;
-	
-	/** The graph info. */
-	private GraphInfo graphInfo;
 	
 	/**
 	 * Gets the subscriber id.
@@ -95,42 +88,5 @@ public class SubscriberDataSource {
 	 */
 	public void setSubscriberDataSourceID(String subscriberDataSourceID) {
 		this.subscriberDataSourceID = subscriberDataSourceID;
-	}
-
-	/**
-	 * Gets the subscriber view configuration.
-	 *
-	 * @return the subscriber view configuration
-	 */
-	public SubscriberViewConfiguration getSubscriberViewConfiguration() {
-		return subscriberViewConfiguration;
-	}
-
-	/**
-	 * Sets the subscriber view configuration.
-	 *
-	 * @param subscriberViewConfiguration the new subscriber view configuration
-	 */
-	public void setSubscriberViewConfiguration(
-			SubscriberViewConfiguration subscriberViewConfiguration) {
-		this.subscriberViewConfiguration = subscriberViewConfiguration;
-	}
-
-	/**
-	 * Gets the graph info.
-	 *
-	 * @return the graph info
-	 */
-	public GraphInfo getGraphInfo() {
-		return graphInfo;
-	}
-
-	/**
-	 * Sets the graph info.
-	 *
-	 * @param graphInfo the new graph info
-	 */
-	public void setGraphInfo(GraphInfo graphInfo) {
-		this.graphInfo = graphInfo;
 	}
 }
